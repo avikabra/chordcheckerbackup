@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://chordchecker.com/</loc>
+	<lastmod>2020-08-01T10:46:54+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://chordchecker.com/learn</loc>
+	<lastmod>2020-08-01T10:46:55+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://chordchecker.com/about</loc>
+	<lastmod>2020-08-01T10:46:58+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://chordchecker.com/resources</loc>
+	<lastmod>2020-08-01T10:46:58+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://chordchecker.com/songs</loc>
+	<lastmod>2020-08-01T10:46:58+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+</urlset>

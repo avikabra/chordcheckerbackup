@@ -1,0 +1,1399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="public,no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Cache-Control" content="max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta property="og:title" content="Guitar Chord Checker - Accurate Chord Recording and Matching">
+    <meta property="og:description" content="With many chords available to users, this guitar learning application is a quick and convenient way to check the accuracy of guitar chords on the fly. Simply select a chord and record a sample, and an analysis of your recording will be outputted back to you. Founded in 2020, Guitar Chord Checker aims to help millions of guitarists refine their skills without any hassle. Its mission is to be an easily accessible tool for the everyday guitarist with just one click of a button">
+    <meta property="og:image" content="https://chords-checker.herokuapp.com/static/img/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="With many chords available to users, this guitar learning application is a quick and convenient way to check the accuracy of guitar chords on the fly. Simply select a chord and record a sample, and an analysis of your recording will be outputted back to you. Founded in 2020, Guitar Chord Checker aims to help millions of guitarists refine their skills without any hassle. Its mission is to be an easily accessible tool for the everyday guitarist with just one click of a button">
+    <meta name="author" content="Frontline Strategy Ltd.">
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+ -->    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css"/>
+    <link href="../static/css/basic.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/dropzone.min.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" 
+    type="image/png" 
+    href="../static/img/logo.ico"/>
+
+    <title>Guitar Chord Checker - Accurate Chord Matching</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template -->
+  </head>
+  <body class="text-center">
+    
+    
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <!-- <header class="masthead mb-auto">
+      <div class="inner">
+        <div class="row col-12">
+
+          <div class="my-2 my-lg-0 masthead-brand text-left col-md-12 col-lg-4 col-sm-12 col-xl-4"><img src="../static/img/logo.png" style="width: 150px; height:auto;" alt=""></div>
+          <nav class="nav nav-masthead col-lg-8 col-sm-12 col-md-12 col-xl-8">
+            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link" href="about">About</a>
+          </nav>
+        </div>
+      </div>
+    </header> -->
+
+    
+    <header class="masthead mb-auto">
+      <div class="inner col-12">
+        <div class="my-2 my-lg-0 masthead-brand text-center col-md-12 col-lg-4 col-sm-12 col-xl-4"><img src="../static/img/logo.png" style="width: 150px; height:auto;" alt=""></div>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="nav-link active" href="/">Home</a>
+          <a class="nav-link" href="learn">Learn</a>
+          <a class="nav-link" href="about">About</a>
+          <a class="nav-link" href="resources">Resources</a>
+          <a class="nav-link" href="songs">Songs</a>
+        </nav>
+      </div>
+    </header>
+
+
+
+    <!-- <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="position: absolute;">
+        
+      <div class="toast"  data-delay="3000" data-autohide="false">
+        <div class="toast-header">
+          <strong class="mr-auto">ChordChecker</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          Save your record and upload it to check your chord!
+        </div>
+      </div>
+
+    </div> -->
+
+
+
+    <main role="main" class="inner cover ">  
+      <h2 class="cover-heading mb-4 d-lg-none">Guitar Chord Learning Application</h2>
+      <h1 class="cover-heading mb-4 d-none d-lg-block ">Guitar Chord Learning Application</h1>
+      <p class="lead  mb-0 mb-lg-4 mb-xl-4">Choose a chord and record an audio sample:</p>
+
+      <div id="bigDiv">
+      <div class="row mb-0 mb-lg-4 mb-xl-4 col-12 d-flex justify-content-center align-items-center" id="myDiv">
+            <div class="col-1 col d-none d-lg-block"></div>
+            <button id="c"  class="col-2 bt-active btn btn-dark themed-grid-col">C</button>
+            <div class="col-1 d-none d-lg-block"></div>
+            <button id="g"  class="col-2 btn btn-dark themed-grid-col">G</button>
+            <div class="col-1 d-none d-lg-block"></div>
+            <button id="d"  class="col-2 btn btn-dark themed-grid-col">D</button>
+            <div class="col-1 d-none d-lg-block"></div>
+            <button id="f"  class="col-2 btn btn-dark themed-grid-col">F</button>
+      </div>
+
+      <div class="row mb-0 mb-lg-4 mb-xl-4 col-12 d-flex justify-content-center align-items-center" id="myDiv">
+        <div class="col-1 col d-none d-lg-block"></div>
+        <button id="a"  class="col-2 btn btn-dark themed-grid-col">A</button>
+        <div class="col-1 d-none d-lg-block"></div>
+        <button id="am"  class="col-2 btn btn-dark themed-grid-col">Am</button>
+        <div class="col-1 d-none d-lg-block"></div>
+        <button id="e"  class="col-2 btn btn-dark themed-grid-col">E</button>
+        <div class="col-1 d-none d-lg-block"></div>
+        <button id="em"  class="col-2 btn btn-dark themed-grid-col">Em</button>
+      </div>
+      </div>
+
+      <div class="row col-12 ">
+
+
+        <div id="myModal2"  class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0);">
+             
+              <div class="modal-body">                
+                  <div class="msg-dz alert alert-info alert-dismissible displaystyle-leftborder displaystyle-info" role="alert">
+                    <div class="">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div> 
+                    <p class="msg-dz-ctn  mt-4"></p>
+                  </div>
+              </div>            
+            </div>
+          </div>
+        </div>
+
+        
+        <div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+              
+              <div class="modal-body">
+                <div id="dropzone">
+
+                  
+                  <form action="/api/file-upload" class="dropzone needsclick" id="my-awesome-dropzone">
+                    <input type="hidden" name="chord" value="" id="chord" />
+                    
+
+                    <div class="dz-message needsclick">
+                      <button type="button" class="dz-button color-dark">Drop your file here or click to upload <br/><b>(file needs to be in a .wav format)</b></button><br />
+                      <!-- <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span> -->
+                    </div>
+                    <div class="col-12 justify-content-center align-items-center text-center">
+                      <button type="submit" class="col-4 text-center btn btn-outline-primary" id="send-file">Process</button>
+                    </div>
+                                      
+                  </form>
+                </div>
+              </div>
+
+            
+            </div>
+          </div>
+        </div>
+
+          <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12  mt-4 btn-rec">
+            <p class="lead mt-0 mt-lg-4 mt-xl-4">
+              <button id="toggleRec" class="btn btn-lg btn-primary"> <i class="fa fa-play"></i> Record</button>
+            </p>
+            
+            <p class="lead">
+              <a data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-lg btn-primary"> <i class="fa fa-file"></i> Upload</a>
+            </p>
+ 
+            <p class="lead close-audio-lay" style="display: none;">
+              <button class="close-audio btn btn-lg btn-primary" ><i class="fa fa-remove"></i> Remove</button>
+            </p>
+
+                      
+            <p id="upload" class="lead " style="display: none;">
+              <button class="btn btn-lg btn-primary" ><i class="fa fa-send"></i> <span class="up-txt">Check chord</span></button>
+            </p>
+
+            <ul class="col-12 recList list-unstyled" id="recList">
+
+            </ul>
+
+          </div>
+          <div class="col-lg-8 col-xl-8 col-md-12 col-sm-12 mt-0 mt-lg-4 mt-xl-4">
+            <table id="c-tab" style="width:100%">
+              <tr >
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table> 
+
+            <table id="g-tab" style="width:100%">
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td >
+                 
+                </td>
+              </tr>
+            </table>
+            <table id="d-tab" style="width:100%">
+              <tr>
+                <td>
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td  class="bt" >
+                  
+                </td>
+                <td  >
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   class="bt">
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td  >
+                  
+                </td>
+              </tr>
+              <tr class="bt2">
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr class="bt2">
+                <td  >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table> 
+            <table id="f-tab" style="width:100%">
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr>
+                <td  >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+              </tr>
+              <tr>
+                <td   >
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td   >
+                  
+                </td>
+                <td   >
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table> 
+            
+            <table id="a-tab" style="width:100%">
+              <tr >
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td >
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table> 
+
+            <table id="am-tab" style="width:100%">
+              <tr >
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td >
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table>
+            
+            <table id="e-tab" style="width:100%">
+              <tr >
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td >
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table> 
+
+            <table id="em-tab" style="width:100%">
+              <tr >
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td   class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td >
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td class="bt">
+                  
+                </td>
+                <td >
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td class="bt">
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr  class="bt2">
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table> 
+            
+          </div>
+        
+          <!-- <div class="col-6 my-4"></div>
+          <div class="col-6 my-4">
+            <div class="msg-dz alert alert-info alert-dismissible displaystyle-leftborder displaystyle-info" role="alert">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <p class="msg-dz-ctn  mt-4"></p>
+            </div>
+          </div> -->
+        
+
+      </div>
+
+    </main>
+
+
+
+
+    <footer class="mastfoot mt-auto">
+      <div class="inner">
+        <p>&copy; Avi Kabra</p>
+      </div>
+    </footer>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174183017-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-174183017-1');
+</script>
+
+<script src="{{ url_for('static', filename="js/dropzone.min.js") }}" type="text/javascript" > </script>
+<!-- Change dev to production version -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ -->
+
+<script>
+
+//Dropzone.options.myAwesomeDropzone = false;
+//Dropzone.autoDiscover = false;
+
+//var myDropzone = new Dropzone("div#dropzone", { url: "/api/file-upload"});
+var isRec=false;
+var gumStream; 						//stream from getUserMedia()
+var rec; 							//Recorder.js object
+var input; 							//MediaStreamAudioSourceNode we'll be recording
+
+// shim for AudioContext when it's not avb. 
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext //audio context to help us record
+var constraints = { audio: true, video:false }
+var recordingsList = document.getElementById("recList");
+var stp_timeout;
+$(".close-audio-lay").hide();
+var upload = $('#upload');
+upload.hide();
+function startRec(){
+  isRec=true;
+  navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+      console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
+      audioContext = new AudioContext();
+      gumStream = stream;
+      /* use the stream */
+      input = audioContext.createMediaStreamSource(stream);
+      rec = new Recorder(input,{numChannels:1})
+      rec.record()
+      recordingsList.innerHTML="";
+      $("#toggleRec").html('<i class="fa fa-pause"></i> Recording...');
+      console.log("Recording started");
+      stp_timeout=setTimeout(function(){ 
+        if(isRec)
+          stopRec();
+       }, 5000);
+
+
+  });
+}
+
+function stopRec() {
+	console.log("stoppingg rec...");
+	//disable the stop button, enable the record too allow for new recordings
+	isRec=false;
+	rec.stop();
+
+	//stop microphone access
+  gumStream.getAudioTracks()[0].stop();
+  $(".close-audio-lay").show();
+  $("#toggleRec").html('<i class="fa fa-play"></i> Record');
+
+
+	//create the wav blob and pass it on to createDownloadLink
+	rec.exportWAV(createDownloadLink);
+}
+
+function createDownloadLink(blob) {
+
+	
+	var url = URL.createObjectURL(blob);
+	var au = document.createElement('audio');
+	var li = document.createElement('li');
+	var link = document.createElement('a');
+
+	//name of .wav file to use during upload and download (without extendion)
+	var filename = new Date().toISOString();
+
+	//add controls to the <audio> element
+	au.controls = true;
+	au.src = url;
+
+	//save to disk link
+	link.href = url;
+	link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
+	link.innerHTML = "<br/>Download";
+
+	//add the new audio element to li
+	li.appendChild(au);
+	
+	//add the filename to the li
+	//li.appendChild(document.createTextNode(filename+".wav "))
+
+	//add the save to disk link to li
+	// li.appendChild(link);
+	
+	//upload link
+
+  upload.show();
+	// var upload = document.createElement('a');
+  upload.click(()=>{
+    var fd=new FormData();
+    fd.append("file",blob, filename+".wav");
+    fd.append("chord",$("#chord").val())
+    $(".up-txt").html("Checking...");
+    
+    var req=$.ajax({
+    type: "POST",
+    url: "/api/file-upload",
+    data: fd,
+    contentType: false,
+    processData: false,
+    success: function(resp,status){
+      console.log("Server returned: ",resp);
+      $(".close-audio").trigger('click');
+      $("#myModal2").modal('show');
+      $(".msg-dz-ctn").html("<p>"+resp+"</p>");
+      upload.hide();
+      $(".up-txt").html("Check chord");
+    },
+    // dataType: dataType
+    });
+
+  })
+	
+	// li.appendChild(document.createTextNode (" "))//add a space in between
+	// li.appendChild(upload)//add the upload link to li
+
+	//add the li element to the ol
+	recordingsList.appendChild(li);
+  // $('.toast').show();
+  // $('.toast').toast('show');
+}
+
+
+
+/* $('.toast').hide();
+$('.toast').toast('show');
+
+$('.toast').on('hidden.bs.toast', function () {
+  $('.toast').hide();
+  console.log("HHDD");
+}) */
+
+$("#toggleRec").click(function(){
+  $(".close-audio").trigger("click");
+  clearTimeout(stp_timeout);
+  if(isRec)
+    stopRec();
+  else startRec();  
+
+});
+
+
+$(".close-audio").click(function(){
+  recordingsList.innerHTML=""; 
+  upload.hide();
+  $(".close-audio-lay").hide();
+
+
+});
+
+
+
+ff=null;
+dzClosure=null;
+var tmt;
+
+$("#send-file").hide();
+
+Dropzone.options.myAwesomeDropzone= {
+    url: '/api/file-upload',
+    autoProcessQueue: false,
+    uploadMultiple: false,
+    parallelUploads: 1,
+    maxFiles: 1,
+    maxFilesize: 5,
+    acceptedFiles: 'audio/wav',
+    init: function() {
+        dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+       /*  if(ff!=null)
+          dzClosure.removeFile(ff) */
+          $("#myModal2").modal('hide');
+        // for Dropzone to process the queue (instead of default form behavior):
+         document.getElementById("send-file").addEventListener("click", function(e) {
+            // Make sure that the form isn't actually being sent.
+            e.preventDefault();
+            e.stopPropagation();
+            dzClosure.processQueue();
+        }); 
+        
+
+        this.on("complete", function(file,response) {
+          dzClosure.removeFile(file);
+          console.log(file.xhr.response);
+          $('#myModal').modal('hide');
+          $("#myModal2").modal('show');
+          $(".msg-dz-ctn").html("<p>"+file.xhr.response+"</p>");
+
+          /* tmt=setTimeout(function(){ 
+            $(".msg-dz").hide();
+          }, 12000); */
+
+        });
+
+        this.on("addedfile", function(file,response) {
+          ff=file;
+          $("#myModal2").modal('hide');
+          clearTimeout(tmt);
+          $("#send-file").show();
+          /* if(ff!=null)
+            dzClosure.removeFile(ff) */
+        });
+    }
+}
+
+
+$("#myModal").on("hidden.bs.modal", function () {
+  console.log("on hidden: ",dzClosure)
+  console.log("on hidden: ",ff)
+    if(dzClosure!=null && ff!=null){
+      console.log("hide: ")
+      dzClosure.removeFile(ff);
+    }
+    $("#send-file").hide();
+});
+
+/* Dropzone.options.myAwesomeDropzone = {
+  
+  addedfile: function(file) {
+    alert("Added file.");
+  },
+  complete: function(file) {
+    alert("Complete file.");
+  }
+}; */
+
+$("#chord").val("C");
+//Hide other tables
+$("#g-tab").hide();
+$("#d-tab").hide();
+$("#f-tab").hide();
+$("#a-tab").hide();
+$("#am-tab").hide();
+$("#e-tab").hide();
+$("#em-tab").hide();
+
+$("#c").click(function(e){
+  $("#chord").val("C");
+  $("#c-tab").show();
+  $("#g-tab").hide();
+  $("#d-tab").hide();
+  $("#f-tab").hide();
+  $("#a-tab").hide();
+  $("#am-tab").hide();
+  $("#e-tab").hide();
+  $("#em-tab").hide();
+});
+
+$("#g").click(function(e){
+  $("#chord").val("G");
+  
+  $("#c-tab").hide();
+  $("#g-tab").show();
+  $("#d-tab").hide();
+  $("#f-tab").hide();
+  $("#a-tab").hide();
+  $("#am-tab").hide();
+  $("#e-tab").hide();
+  $("#em-tab").hide();
+});
+
+$("#d").click(function(e){
+  $("#chord").val("D");
+  
+  $("#c-tab").hide();
+  $("#g-tab").hide();
+  $("#d-tab").show();
+  $("#f-tab").hide();
+  $("#a-tab").hide();
+  $("#am-tab").hide();
+  $("#e-tab").hide();
+  $("#em-tab").hide();
+});
+
+$("#f").click(function(e){
+  $("#chord").val("F");
+  
+  $("#c-tab").hide();
+  $("#g-tab").hide();
+  $("#d-tab").hide();
+  $("#f-tab").show();
+  $("#a-tab").hide();
+  $("#am-tab").hide();
+  $("#e-tab").hide();
+  $("#em-tab").hide();
+});
+
+$("#a").click(function(e){
+  $("#chord").val("A");
+  
+  $("#c-tab").hide();
+  $("#g-tab").hide();
+  $("#d-tab").hide();
+  $("#f-tab").hide();
+  $("#a-tab").show();
+  $("#am-tab").hide();
+  $("#e-tab").hide();
+  $("#em-tab").hide();
+});
+
+$("#am").click(function(e){
+  $("#chord").val("Am");
+  
+  $("#c-tab").hide();
+  $("#g-tab").hide();
+  $("#d-tab").hide();
+  $("#f-tab").hide();
+  $("#a-tab").hide();
+  $("#am-tab").show();
+  $("#e-tab").hide();
+  $("#em-tab").hide();
+});
+
+$("#e").click(function(e){
+  $("#chord").val("E");
+  
+  $("#c-tab").hide();
+  $("#g-tab").hide();
+  $("#d-tab").hide();
+  $("#f-tab").hide();
+  $("#a-tab").hide();
+  $("#am-tab").hide();
+  $("#e-tab").show();
+  $("#em-tab").hide();
+});
+
+$("#em").click(function(e){
+  $("#chord").val("Em");
+  
+  $("#c-tab").hide();
+  $("#g-tab").hide();
+  $("#d-tab").hide();
+  $("#f-tab").hide();
+  $("#a-tab").hide();
+  $("#am-tab").hide();
+  $("#e-tab").hide();
+  $("#em-tab").show();
+});
+
+
+// Get the container element
+var btnContainer = document.getElementById("bigDiv");
+
+// Get all buttons with class="btn" inside the container
+var btns = btnContainer.getElementsByClassName("btn");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("bt-active");
+
+    // If there's no active class
+    if (current.length > 0) {
+      current[0].className = current[0].className.replace(" bt-active", "");
+    }
+
+    // Add the active class to the current/clicked button
+    this.className += " bt-active";
+  });
+} 
+</script>
+</html>
